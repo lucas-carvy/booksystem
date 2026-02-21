@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/collection")
 public class CollectionController {
 
-    private HttpAllRequestsService httpAllRequestsService;
+    private final HttpAllRequestsService httpAllRequestsService;
 
     public CollectionController(HttpAllRequestsService httpAllRequestsService){
         this.httpAllRequestsService = httpAllRequestsService;

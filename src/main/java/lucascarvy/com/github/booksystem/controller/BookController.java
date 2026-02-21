@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/book")
 public class BookController {
 
-    private HttpAllRequestsService httpAllRequestsService;
+    private final HttpAllRequestsService httpAllRequestsService;
 
     public BookController(HttpAllRequestsService httpAllRequestsService){
         this.httpAllRequestsService = httpAllRequestsService;
