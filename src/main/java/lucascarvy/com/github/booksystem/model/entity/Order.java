@@ -1,14 +1,9 @@
 package lucascarvy.com.github.booksystem.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,21 +14,22 @@ import java.util.UUID;
 public class Order {
 
     @Id
-    @Column(name = "orderid")
+    @Column(name = "order_id")
     private String orderId = UUID.randomUUID().toString();
-    @Column(name = "totalprice")
-    private BigDecimal totalValue = null;
-    @Column(name = "orderlistid")
-    private String orderListId;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> items;
 
     public Order() {
     }
 
-    public Order(String orderId, BigDecimal totalValue) {
+    public Order(String orderId) {
         this.orderId = orderId;
-        this.totalValue = totalValue;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId='" + orderId + '\'' +
+                '}';
+    }
 }

@@ -1,20 +1,25 @@
 package lucascarvy.com.github.booksystem.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
 public class Collection {
 
     @Id
-    @Column(name = "collectionid")
+    @Column(name = "collection_id")
     private String id = UUID.randomUUID().toString();
     @Column(name = "name")
     private String name;
+    @OneToMany(mappedBy = "collection")
+    private List<Book> books;
 
     public Collection() {
     }
@@ -22,22 +27,6 @@ public class Collection {
     public Collection(String name, String id) {
         this.name = name;
         this.id = id;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

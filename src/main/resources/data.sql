@@ -1,30 +1,30 @@
 create table collection (
-    collectionid varchar(400) not null primary key,
+    collection_id varchar(400) not null primary key,
     name varchar(55) not null
 );
 
 create table book (
-    id varchar(400) not null primary key,
+    book_id varchar(400) not null primary key,
     name varchar(55) not null,
     price numeric(20, 2),
-    collectionid varchar(400),
+    collection_id varchar(400),
 
-    constraint fk_clc_collectionid foreign key (collectionid) references collection (collectionid)
-);
-
-create table order_list (
-    orderlistid varchar(400) not null primary key,
-    bookid varchar(400),
-
-    constraint fk_bok_bookid foreign key (bookid) references book (id)
-
+    constraint fk_clc_collectionid foreign key (collection_id) references collection (collection_id)
 );
 
 create table orders (
-    orderid varchar(400) not null primary key,
-    totalprice numeric(20, 2),
-    orderlistid varchar(400),
+     order_id varchar(400) not null primary key,
+     order_item_id varchar(400)
 
-    constraint fk_oli_orderlistid foreign key (orderlistid) references order_list (orderlistid)
+);
+
+create table order_item (
+    order_item_id varchar(400) not null primary key,
+    order_id varchar(400) not null,
+    book_id varchar(400),
+    quantity numeric(50),
+
+    constraint fk_ori_orderid foreign key (order_id) references orders (order_id),
+    constraint fk_bok_bookid foreign key (book_id) references book (book_id)
 
 );
